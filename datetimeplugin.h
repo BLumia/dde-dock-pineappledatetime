@@ -2,8 +2,10 @@
  * Copyright (C) 2011 ~ 2018 Deepin Technology Co., Ltd.
  *
  * Author:     sbw <sbw@sbw.so>
+ * 	           blumia <wzc782970009@gmail.com>
  *
  * Maintainer: sbw <sbw@sbw.so>
+ * 	           blumia <wzc782970009@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +35,7 @@ class DatetimePlugin : public QObject, PluginsItemInterface
 {
     Q_OBJECT
     Q_INTERFACES(PluginsItemInterface)
-    Q_PLUGIN_METADATA(IID "com.deepin.dock.PluginsItemInterface" FILE "datetime.json")
+    Q_PLUGIN_METADATA(IID "com.deepin.dock.PluginsItemInterface" FILE "pineappledatetime.json")
 
 public:
     explicit DatetimePlugin(QObject *parent = 0);
@@ -43,7 +45,10 @@ public:
     void init(PluginProxyInterface *proxyInter) override;
 
     void pluginStateSwitched() override;
-    bool pluginIsAllowDisable() override { return true; }
+    bool pluginIsAllowDisable() override
+    {
+        return true;
+    }
     bool pluginIsDisable() override;
 
     int itemSortKey(const QString &itemKey);
