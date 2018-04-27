@@ -50,30 +50,32 @@ DatetimePlugin::DatetimePlugin(QObject *parent)
 
 const QString DatetimePlugin::pluginName() const
 {
-    return "datetime";
+    return "pinappledatetime";
 }
 
 const QString DatetimePlugin::pluginDisplayName() const
 {
-    return tr("Datetime");
+    return QString("Pineapple ") + tr("Datetime");
 }
 
 void DatetimePlugin::init(PluginProxyInterface *proxyInter)
 {
     m_proxyInter = proxyInter;
 
-    if (m_centralWidget->enabled())
+    if (m_centralWidget->enabled()) {
         m_proxyInter->itemAdded(this, QString());
+    }
 }
 
 void DatetimePlugin::pluginStateSwitched()
 {
     m_centralWidget->setEnabled(!m_centralWidget->enabled());
 
-    if (m_centralWidget->enabled())
+    if (m_centralWidget->enabled()) {
         m_proxyInter->itemAdded(this, QString());
-    else
+    } else {
         m_proxyInter->itemRemoved(this, QString());
+    }
 }
 
 bool DatetimePlugin::pluginIsDisable()
@@ -127,10 +129,11 @@ const QString DatetimePlugin::itemContextMenu(const QString &itemKey)
 
     QMap<QString, QVariant> settings;
     settings["itemId"] = "settings";
-    if (m_centralWidget->is24HourFormat())
+    if (m_centralWidget->is24HourFormat()) {
         settings["itemText"] = tr("12 Hour Time");
-    else
+    } else {
         settings["itemText"] = tr("24 Hour Time");
+    }
     settings["isActive"] = true;
     items.push_back(settings);
 
@@ -155,12 +158,12 @@ void DatetimePlugin::invokedMenuItem(const QString &itemKey, const QString &menu
 
     if (menuId == "open") {
         DDBusSender()
-            .service("com.deepin.dde.ControlCenter")
-            .interface("com.deepin.dde.ControlCenter")
-            .path("/com/deepin/dde/ControlCenter")
-            .method(QString("ShowModule"))
-            .arg(QString("datetime"))
-            .call();
+        .service("com.deepin.dde.ControlCenter")
+        .interface("com.deepin.dde.ControlCenter")
+        .path("/com/deepin/dde/ControlCenter")
+        .method(QString("ShowModule"))
+        .arg(QString("datetime"))
+        .call();
     } else {
         m_centralWidget->toggleHourFormat();
     }
@@ -170,15 +173,17 @@ void DatetimePlugin::updateCurrentTimeString()
 {
     const QDateTime currentDateTime = QDateTime::currentDateTime();
 
-    if (m_centralWidget->is24HourFormat())
+    if (m_centralWidget->is24HourFormat()) {
         m_dateTipsLabel->setText(currentDateTime.date().toString(Qt::SystemLocaleLongDate) + currentDateTime.toString(" HH:mm:ss"));
-    else
+    } else {
         m_dateTipsLabel->setText(currentDateTime.date().toString(Qt::SystemLocaleLongDate) + currentDateTime.toString(" hh:mm:ss A"));
+    }
 
     const QString currentString = currentDateTime.toString("mm");
 
-    if (currentString == m_currentTimeString)
+    if (currentString == m_currentTimeString) {
         return;
+    }
 
     m_currentTimeString = currentString;
     m_centralWidget->update();

@@ -1,5 +1,5 @@
 
-set(PLUGIN_NAME "datetime")
+set(PLUGIN_NAME "pineappledatetime")
 
 project(${PLUGIN_NAME})
 

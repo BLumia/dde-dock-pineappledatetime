@@ -22,7 +22,7 @@
 #ifndef DATETIMEPLUGIN_H
 #define DATETIMEPLUGIN_H
 
-#include "pluginsiteminterface.h"
+#include <dde-dock/pluginsiteminterface.h>
 #include "datetimewidget.h"
 
 #include <QTimer>

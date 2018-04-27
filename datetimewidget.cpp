@@ -20,7 +20,7 @@
  */
 
 #include "datetimewidget.h"
-#include "constants.h"
+#include <dde-dock/constants.h>
 
 #include <QApplication>
 #include <QPainter>
@@ -33,9 +33,9 @@
 DatetimeWidget::DatetimeWidget(QWidget *parent)
     : QWidget(parent),
 
-    m_settings("deepin", "dde-dock-datetime"),
+      m_settings("deepin", "dde-dock-datetime"),
 
-    m_24HourFormat(m_settings.value("24HourFormat", true).toBool())
+      m_24HourFormat(m_settings.value("24HourFormat", true).toBool())
 {
 
 }
@@ -66,10 +66,11 @@ QSize DatetimeWidget::sizeHint() const
 {
     QFontMetrics fm(qApp->font());
 
-    if (m_24HourFormat)
-        return fm.boundingRect("88:88").size() + QSize(20, 10);
-    else
+    if (m_24HourFormat) {
+        return fm.boundingRect("88:88\n8888/88/88").size() + QSize(20, 10);
+    } else {
         return fm.boundingRect("88:88 A.A.").size() + QSize(20, 20);
+    }
 }
 
 void DatetimeWidget::resizeEvent(QResizeEvent *e)
@@ -91,28 +92,26 @@ void DatetimeWidget::paintEvent(QPaintEvent *e)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    if (displayMode == Dock::Efficient)
-    {
+    if (displayMode == Dock::Efficient) {
         QString format;
-        if (m_24HourFormat)
-            format = "hh:mm";
-        else
-        {
-            if (position == Dock::Top || position == Dock::Bottom)
+        if (m_24HourFormat) {
+            format = "hh:mm\nyyyy/M/d";
+        } else {
+            if (position == Dock::Top || position == Dock::Bottom) {
                 format = "hh:mm AP";
-            else
+            } else {
                 format = "hh:mm\nAP";
+            }
         }
 
         painter.setPen(Qt::white);
-        painter.drawText(rect(), Qt::AlignCenter, current.time().toString(format));
+        painter.drawText(rect(), Qt::AlignCenter, current.toString(format));
         return;
     }
 
     const QString currentTimeString = current.toString(m_24HourFormat ? "hhmm" : "hhmma");
     // check cache valid
-    if (m_cachedTime != currentTimeString)
-    {
+    if (m_cachedTime != currentTimeString) {
         m_cachedTime = currentTimeString;
 
         // draw new pixmap
@@ -148,8 +147,7 @@ void DatetimeWidget::paintEvent(QPaintEvent *e)
         const QPoint bigNum2Offset = bigNum1Offset + QPoint(bigNumWidth + 1, 0);
         p.drawPixmap(bigNum2Offset, bigNum2);
 
-        if (!m_24HourFormat)
-        {
+        if (!m_24HourFormat) {
             // draw small num 1
             const QString smallNum1Path = QString(":/icons/resources/icons/small%1.svg").arg(currentTimeString[2]);
             const QPixmap smallNum1 = loadSvg(smallNum1Path, QSize(smallNumWidth, smallNumHeight));
@@ -167,10 +165,11 @@ void DatetimeWidget::paintEvent(QPaintEvent *e)
             const int tips_height = tips_width / 2;
 
             QPixmap tips;
-            if (current.time().hour() > 11)
+            if (current.time().hour() > 11) {
                 tips = loadSvg(":/icons/resources/icons/tips-pm.svg", QSize(tips_width, tips_height));
-            else
+            } else {
                 tips = loadSvg(":/icons/resources/icons/tips-am.svg", QSize(tips_width, tips_height));
+            }
 
             const QPoint tipsOffset = bigNum2Offset + QPoint(bigNumWidth + 2, bigNumHeight - tips_height);
             p.drawPixmap(tipsOffset, tips);
@@ -195,12 +194,12 @@ void DatetimeWidget::paintEvent(QPaintEvent *e)
 
 void DatetimeWidget::mousePressEvent(QMouseEvent *e)
 {
-    if (e->button() != Qt::RightButton)
+    if (e->button() != Qt::RightButton) {
         return QWidget::mousePressEvent(e);
+    }
 
     const QPoint p(e->pos() - rect().center());
-    if (p.manhattanLength() < std::min(width(), height()) * 0.8 * 0.5)
-    {
+    if (p.manhattanLength() < std::min(width(), height()) * 0.8 * 0.5) {
         emit requestContextMenu();
         return;
     }
