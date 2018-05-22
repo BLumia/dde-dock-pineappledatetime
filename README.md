@@ -2,6 +2,10 @@
 
 *Please notice that this is **NOT** an official project*
 
+### Screenshot
+
+![Screenshot of pineappledatetime](https://github.com/BLumia/dde-dock-pineappledatetime/raw/media/screenshot.png)
+
 ### Info
 
 Simple quick hack to make it display year/month/day on it's `Dock::Efficient` mode (`24HourFormat` only). Also some really little simple tweak to make it compilable without fetching the full dde-dock repo.
