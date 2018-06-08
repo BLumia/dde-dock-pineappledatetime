@@ -1,3 +1,4 @@
+cmake_minimum_required(VERSION 3.7)
 
 set(PLUGIN_NAME "pineappledatetime")
 # set(CMAKE_VERBOSE_MAKEFILE 1)
