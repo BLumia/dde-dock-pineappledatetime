@@ -164,7 +164,7 @@ void DatetimePlugin::invokedMenuItem(const QString &itemKey, const QString &menu
         .interface("com.deepin.dde.ControlCenter")
         .path("/com/deepin/dde/ControlCenter")
         .method(QString("ShowModule"))
-        .arg(QString("datetime"))
+        .arg(QString("pineappledatetime"))
         .call();
     } else {
         m_centralWidget->toggleHourFormat();
