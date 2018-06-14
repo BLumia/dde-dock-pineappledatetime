@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 3.7)
 set(PLUGIN_NAME "pineappledatetime")
 # set(CMAKE_VERBOSE_MAKEFILE 1)
 
-
 project(${PLUGIN_NAME})
 
 set(CMAKE_CXX_STANDARD 14)
@@ -20,6 +19,11 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Svg REQUIRED)
 find_package(Qt5DBus REQUIRED)
 find_package(DtkWidget REQUIRED)
+
+# Install settings
+if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+        set(CMAKE_INSTALL_PREFIX /usr CACHE PATH "Default install path" FORCE)
+endif ()
 
 add_definitions("-DQT_PLUGIN ${QT_DEFINITIONS}")
 add_library(${PLUGIN_NAME} SHARED ${SRCS} resources.qrc)

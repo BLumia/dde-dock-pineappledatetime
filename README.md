@@ -21,16 +21,15 @@ To compile and run:
 ``` bash
 # you should clone it first:
 git clone https://github.com/BLumia/dde-dock-pineappledatetime.git && cd dde-dock-pineappledatetime/
-# then build it
+# create a folder for building it:
 mkdir build
 cd build/
+# then build it:
 cmake ../
 make
 # then you got `libpineappledatetime.so`
 # this will copy this into `/usr/lib/dde-dock/plugins/`
-# p.s. `make install` will copy the lib to `/usr/share/lib/dde-dock/plugins`
-#      but it seems `dde-dock` doesn't scan that path by default...
-sudo cp ../libpineappledatetime.so /usr/lib/dde-dock/plugins/
+sudo make install
 # finally, restart `dde-dock` (kill it and dde will restart it automatically)
 killall dde-dock
 ```
