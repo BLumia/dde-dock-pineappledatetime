@@ -35,7 +35,7 @@
 DatetimeWidget::DatetimeWidget(QWidget *parent)
     : QWidget(parent),
 
-      m_settings("deepin", "dde-dock-datetime"),
+      m_settings("deepin", "dde-dock-pineappledatetime"),
 
       m_24HourFormat(m_settings.value("24HourFormat", true).toBool())
 {

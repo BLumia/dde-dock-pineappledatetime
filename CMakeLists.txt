@@ -22,7 +22,7 @@ find_package(DtkWidget REQUIRED)
 
 # Install settings
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-        set(CMAKE_INSTALL_PREFIX /usr CACHE PATH "Default install path" FORCE)
+  set(CMAKE_INSTALL_PREFIX /usr)
 endif ()
 
 add_definitions("-DQT_PLUGIN ${QT_DEFINITIONS}")
