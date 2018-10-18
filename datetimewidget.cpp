@@ -69,9 +69,9 @@ QSize DatetimeWidget::sizeHint() const
     QFontMetrics fm(qApp->font());
 
     if (m_24HourFormat) {
-        return fm.boundingRect("88:88\n8888/88/88").size() + QSize(20, 10);
+        return fm.boundingRect(this->rect(), Qt::AlignCenter, "88:88\n8888/88/88").size() + QSize(20, 10);
     } else {
-        return fm.boundingRect("88:88 A.A.\n8888/88/88").size() + QSize(20, 20);
+        return fm.boundingRect(this->rect(), Qt::AlignCenter, "88:88 A.A.\n8888/88/88").size() + QSize(20, 20);
     }
 }
 
