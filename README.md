@@ -14,7 +14,9 @@ Current codebase is fork from [dde-dock#39c1a6b](https://github.com/linuxdeepin/
 
 ### Usage
 
-You need do `apt-get build-dep dde-dock` first.
+You need do `apt build-dep dde-dock` first.
+
+You also need to install `dde-dock-dev` package: `apt install dde-dock-dev` .
 
 To compile and run:
 
