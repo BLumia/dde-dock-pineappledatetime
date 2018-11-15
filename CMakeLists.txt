@@ -19,6 +19,7 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Svg REQUIRED)
 find_package(Qt5DBus REQUIRED)
 find_package(DtkWidget REQUIRED)
+find_package(DdeDock REQUIRED)
 
 # Install settings
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
@@ -28,7 +29,7 @@ endif ()
 add_definitions("-DQT_PLUGIN ${QT_DEFINITIONS}")
 add_library(${PLUGIN_NAME} SHARED ${SRCS} resources.qrc)
 set_target_properties(${PLUGIN_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ../)
-target_include_directories(${PLUGIN_NAME} PUBLIC ${DtkWidget_INCLUDE_DIRS} /usr/include/dde-dock)
+target_include_directories(${PLUGIN_NAME} PUBLIC ${DtkWidget_INCLUDE_DIRS} ${DdeDock_INCLUDE_DIRS})
 target_link_libraries(${PLUGIN_NAME} PRIVATE
   ${Qt5DBus_LIBRARIES}
   ${DtkWidget_LIBRARIES}
