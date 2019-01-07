@@ -44,10 +44,9 @@ public slots:
     void toggleHourFormat();
 
 private:
-    QSize sizeHint() const;
-    void resizeEvent(QResizeEvent *e);
-    void paintEvent(QPaintEvent *e);
-    void mousePressEvent(QMouseEvent *e);
+    QSize sizeHint() const override;
+    void resizeEvent(QResizeEvent *e) override;
+    void paintEvent(QPaintEvent *e) override;
 
     const QPixmap loadSvg(const QString &fileName, const QSize size);
 
