@@ -14,9 +14,7 @@ Current codebase is fork from [dde-dock#39c1a6b](https://github.com/linuxdeepin/
 
 ### Usage
 
-You need do `apt build-dep dde-dock` first.
-
-You also need to install `dde-dock-dev` package: `apt install dde-dock-dev` .
+We assume you already enabled a `deb-src` source in your `/etc/apt/sources.list` thus you can use `apt build-dep <pkg-name>` to install build depts. Then you need do `apt build-dep dde-dock` first, and install `dde-dock-dev` package by doing `apt install dde-dock-dev`. Of course you can also install the build depts manually if you like.
 
 To compile and run:
 

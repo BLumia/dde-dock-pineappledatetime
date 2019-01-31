@@ -27,6 +27,8 @@
 #include <QLabel>
 #include <QDebug>
 
+#define PLUGIN_STATE_KEY "enable"
+
 DatetimePlugin::DatetimePlugin(QObject *parent)
     : QObject(parent),
 
@@ -70,9 +72,9 @@ void DatetimePlugin::init(PluginProxyInterface *proxyInter)
 
 void DatetimePlugin::pluginStateSwitched()
 {
-    m_centralWidget->setEnabled(!m_centralWidget->enabled());
+    m_proxyInter->saveValue(this, PLUGIN_STATE_KEY, pluginIsDisable());
 
-    if (m_centralWidget->enabled()) {
+    if (!pluginIsDisable()) {
         m_proxyInter->itemAdded(this, pluginName());
     } else {
         m_proxyInter->itemRemoved(this, pluginName());
@@ -81,7 +83,7 @@ void DatetimePlugin::pluginStateSwitched()
 
 bool DatetimePlugin::pluginIsDisable()
 {
-    return !m_centralWidget->enabled();
+    return !(m_proxyInter->getValue(this, PLUGIN_STATE_KEY, true).toBool());
 }
 
 int DatetimePlugin::itemSortKey(const QString &itemKey)
