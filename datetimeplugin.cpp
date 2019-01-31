@@ -22,10 +22,13 @@
  */
 
 #include "datetimeplugin.h"
+#include "datetimetipswidget.h"
 
 #include <DDBusSender>
 #include <QLabel>
 #include <QDebug>
+
+#define PLUGIN_STATE_KEY "enable"
 
 DatetimePlugin::DatetimePlugin(QObject *parent)
     : QObject(parent),
@@ -70,9 +73,9 @@ void DatetimePlugin::init(PluginProxyInterface *proxyInter)
 
 void DatetimePlugin::pluginStateSwitched()
 {
-    m_centralWidget->setEnabled(!m_centralWidget->enabled());
+    m_proxyInter->saveValue(this, PLUGIN_STATE_KEY, pluginIsDisable());
 
-    if (m_centralWidget->enabled()) {
+    if (!pluginIsDisable()) {
         m_proxyInter->itemAdded(this, pluginName());
     } else {
         m_proxyInter->itemRemoved(this, pluginName());
@@ -81,7 +84,7 @@ void DatetimePlugin::pluginStateSwitched()
 
 bool DatetimePlugin::pluginIsDisable()
 {
-    return !m_centralWidget->enabled();
+    return !(m_proxyInter->getValue(this, PLUGIN_STATE_KEY, true).toBool());
 }
 
 int DatetimePlugin::itemSortKey(const QString &itemKey)
@@ -111,7 +114,7 @@ QWidget *DatetimePlugin::itemTipsWidget(const QString &itemKey)
 {
     Q_UNUSED(itemKey);
 
-    return m_dateTipsLabel;
+    return new DatetimeTipsWidget(m_centralWidget->is24HourFormat());
 }
 
 const QString DatetimePlugin::itemCommand(const QString &itemKey)

@@ -20,6 +20,7 @@ find_package(Qt5Svg REQUIRED)
 find_package(Qt5DBus REQUIRED)
 find_package(DtkWidget REQUIRED)
 find_package(DdeDock REQUIRED)
+find_package(DFrameworkdbus REQUIRED)
 
 # Install settings
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
