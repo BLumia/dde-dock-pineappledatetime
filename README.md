@@ -1,5 +1,7 @@
 ## dde-dock datetime plugin (modified version)
 
+English | [简体中文](README_zh_CN.md)
+
 *Please notice that this is **NOT** an official project*
 
 ### Screenshot
@@ -33,6 +35,8 @@ sudo make install
 # finally, restart `dde-dock` (kill it and dde will restart it automatically)
 killall dde-dock
 ```
+
+> Notice: You can put your plugin inside `~/.local/lib/dde-dock/plugins/` instead of `/usr/lib/dde-dock/plugins/` after dde-dock version `4.10.4` (version `>4.10.4`).
 
 Then done!
 
